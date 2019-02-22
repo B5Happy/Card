@@ -4,12 +4,29 @@ class Deck {
   List<Card> cards = [];
 
   Deck() {
-    var ranks = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Height', 'Nine', 'Ten', 'Jack', 'Queen', 'Raja'];
+    var ranks = [
+      'Ace',
+      'Two',
+      'Three',
+      'Four',
+      'Five',
+      'Six',
+      'Seven',
+      'Height',
+      'Nine',
+      'Ten',
+      'Jack',
+      'Queen',
+      'Raja'
+    ];
     var suits = ['Diamonds', 'Hearths', 'Clubs', 'Spades'];
 
     for (var suit in suits) {
       for (var rank in ranks) {
-        var card = new Card(rank, suit);
+        var card = new Card(
+          rank: rank,
+          suit: suit
+          );
         cards.add(card);
       }
     }
@@ -17,5 +34,24 @@ class Deck {
 
   toString() {
     return cards.toString();
+  }
+
+  shuffle() {
+    cards.shuffle();
+  }
+
+  cardsWithSuit(String suit) {
+    return cards.where((card) => card.suit == suit);
+  }
+
+  deal(int handSize) {
+    var hand = cards.sublist(0, handSize);
+    cards = cards.sublist(handSize);
+
+    return hand;
+  }
+
+  removeCard(String suit, String rank) {
+    cards.removeWhere((card) => (card.suit == suit) && (card.rank == rank));
   }
 }
